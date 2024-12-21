@@ -1,26 +1,31 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { CurriculumProvider } from './providers/curriculumProvider';
+import { TutorialManager } from './managers/tutorialManager';
+import { getTutorialSteps } from './utils/tutorialSteps';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+    const curriculumProvider = new CurriculumProvider();
+    const tutorialManager = new TutorialManager(context);
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "edu-curriculum" is now active!');
+    vscode.window.registerTreeDataProvider('curriculumView', curriculumProvider);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('edu-curriculum.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from edu-curriculum!');
-	});
+    let disposableSelectPath = vscode.commands.registerCommand('edu-curriculum.selectPath', (type: string) => {
+        const steps = getTutorialSteps(type);
+        tutorialManager.startTutorial(steps);
+    });
 
-	context.subscriptions.push(disposable);
+    context.subscriptions.push(disposableSelectPath);
+
+    // API 노출
+    return {
+        // 다른 확장에서 호출할 수 있는 메서드 제공
+        getCurrentProgress: () => {
+            return curriculumProvider.getCurrentProgress();
+        },
+        updateProgress: (type: string, progress: number) => {
+            curriculumProvider.updateProgress(type, progress);
+        }
+    };
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}

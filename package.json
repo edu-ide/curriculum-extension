@@ -15,9 +15,60 @@
     "commands": [
       {
         "command": "edu-curriculum.helloWorld",
-        "title": "Hello World"
+        "title": "안녕하세요"
+      },
+      {
+        "command": "edu-curriculum.selectPath",
+        "title": "커리큘럼 경로 선택"
+      },
+      {
+        "command": "edu-curriculum.nextStep",
+        "title": "다음 튜토리얼 단계"
+      },
+      {
+        "command": "edu-curriculum.previousStep",
+        "title": "이전 튜토리얼 단계"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "curriculum-explorer",
+          "title": "커리큘럼",
+          "icon": "$(mortar-board)"
+        }
+      ]
+    },
+    "views": {
+      "curriculum-explorer": [
+        {
+          "id": "curriculumView",
+          "name": "커리큘럼 경로"
+        }
+      ]
+    },
+    "customEditors": [
+      {
+        "viewType": "tutorial.preview",
+        "displayName": "튜토리얼 가이드",
+        "selector": [
+          {
+            "filenamePattern": "*.tutorial"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "configuration": {
+      "title": "교육 커리큘럼",
+      "properties": {
+        "edu-curriculum.sharedData": {
+          "type": "object",
+          "default": {},
+          "description": "다른 확장과 공유할 데이터"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
