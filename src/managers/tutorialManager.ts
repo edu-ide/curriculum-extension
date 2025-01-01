@@ -89,4 +89,13 @@ export class TutorialManager {
             this.steps.length
         );
     }
+
+    private async customizeWorkbench() {
+        const config = vscode.workspace.getConfiguration();
+        
+        // 워크벤치 설정 변경
+        await config.update('workbench.colorTheme', 'Default Dark+', true);
+        await config.update('workbench.statusBar.visible', false, true);
+        await config.update('workbench.activityBar.location', 'hidden', true);
+    }
 }

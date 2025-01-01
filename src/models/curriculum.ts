@@ -10,18 +10,26 @@ export class CurriculumItem extends vscode.TreeItem {
         public readonly label: string,
         public readonly type: string,
         public readonly collapsibleState: vscode.TreeItemCollapsibleState,
-        public readonly progress: number = 0,
+        private _progress: number = 0,
         public readonly subItems: SubCurriculum[] = []
     ) {
         super(label, collapsibleState);
-        this.tooltip = new vscode.MarkdownString(`## ${label}\n\n진행률: ${progress}%\n\n${this.getTooltipDetails()}`);
-        this.description = `${progress}% 완료`;
-        this.iconPath = this.getIconByProgress(progress);
-        this.command = {
-            title: '튜토리얼 시작',
-            command: 'edu-curriculum.selectPath',
-            arguments: [type]
-        };
+        this.updateTooltipAndDescription();
+    }
+
+    get progress(): number {
+        return this._progress;
+    }
+
+    setProgress(newProgress: number): void {
+        this._progress = newProgress;
+        this.updateTooltipAndDescription();
+    }
+
+    private updateTooltipAndDescription(): void {
+        this.tooltip = new vscode.MarkdownString(`## ${this.label}\n\n진행률: ${this._progress}%\n\n${this.getTooltipDetails()}`);
+        this.description = `${this._progress}% 완료`;
+        this.iconPath = this.getIconByProgress(this._progress);
     }
 
     private getIconByProgress(progress: number): vscode.ThemeIcon {

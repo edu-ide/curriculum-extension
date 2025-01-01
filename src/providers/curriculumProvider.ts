@@ -3,6 +3,7 @@ import { CurriculumItem, SubCurriculumItem, SubCurriculum } from '../models/curr
 
 export class CurriculumProvider implements vscode.TreeDataProvider<CurriculumItem | SubCurriculumItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<CurriculumItem | undefined | null | void> = new vscode.EventEmitter<CurriculumItem | undefined | null | void>();
+    private items: CurriculumItem[] = [];
     readonly onDidChangeTreeData: vscode.Event<CurriculumItem | undefined | null | void> = this._onDidChangeTreeData.event;
 
     getTreeItem(element: CurriculumItem | SubCurriculumItem): vscode.TreeItem {
@@ -72,10 +73,9 @@ export class CurriculumProvider implements vscode.TreeDataProvider<CurriculumIte
     }
 
     updateProgress(type: string, progress: number) {
-        // 진행률 업데이트 로직
         const item = this.items.find(i => i.type === type);
         if (item) {
-            item.progress = progress;
+            item.setProgress(progress);
             this.refresh();
         }
     }
@@ -96,6 +96,17 @@ export class CurriculumProvider implements vscode.TreeDataProvider<CurriculumIte
         if (externalProgress) {
             // 외부 진행률 데이터 동기화
             this.updateFromExternalData(externalProgress);
+        }
+    }
+
+    private updateFromExternalData(externalProgress: any) {
+        // Update items based on external progress data
+        if (Array.isArray(externalProgress)) {
+            externalProgress.forEach(progress => {
+                if (progress.type && typeof progress.progress === 'number') {
+                    this.updateProgress(progress.type, progress.progress);
+                }
+            });
         }
     }
 }
