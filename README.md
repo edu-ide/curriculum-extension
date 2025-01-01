@@ -1,71 +1,44 @@
-# edu-curriculum README
+# 교육 커리큘럼 확장 프로그램
 
-This is the README for your extension "edu-curriculum". After writing up a brief description, we recommend including the following sections.
+VS Code를 위한 교육용 커리큘럼 및 튜토리얼 가이드 확장 프로그램입니다.
 
-## Features
+## 기능
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- 커리큘럼 트리 뷰
+  - 백엔드, 프론트엔드, 풀스택 개발 과정 제공
+  - 진행 상황 시각적 표시
+  - 각 과정별 세부 단계 확인 가능
 
-For example if there is an image subfolder under your extension project workspace:
+- 튜토리얼 가이드
+  - 단계별 학습 가이드
+  - 진행 상황 표시
+  - 이전/다음 단계 네비게이션
 
-\!\[feature X\]\(images/feature-x.png\)
+## 사용 방법
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. 왼쪽 사이드바의 커리큘럼 아이콘 클릭
+2. 원하는 학습 경로 선택
+3. 튜토리얼 가이드에 따라 학습 진행
+4. 진행 상황 자동 저장
 
-## Requirements
+## 요구사항
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- VS Code 1.96.0 이상
 
-## Extension Settings
+## 확장 설정
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+이 확장은 다음과 같은 설정을 제공합니다:
 
-For example:
+* `edu-curriculum.sharedData`: 다른 확장과 공유할 데이터 설정
 
-This extension contributes the following settings:
+## 알려진 이슈
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+현재 알려진 이슈가 없습니다.
 
-## Known Issues
+## 릴리즈 노트
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+### 0.0.1
 
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+초기 릴리즈
+- 기본 커리큘럼 트리 뷰
+- 튜토리얼 가이드 기능

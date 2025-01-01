@@ -33,9 +33,15 @@ export class CurriculumItem extends vscode.TreeItem {
     }
 
     private getIconByProgress(progress: number): vscode.ThemeIcon {
-        if (progress === 0) return new vscode.ThemeIcon('circle-outline');
-        if (progress < 50) return new vscode.ThemeIcon('circle-slash');
-        if (progress < 100) return new vscode.ThemeIcon('circle-half-filled');
+        if (progress === 0) {
+            return new vscode.ThemeIcon('circle-outline');
+        }
+        if (progress < 50) {
+            return new vscode.ThemeIcon('circle-slash');
+        }
+        if (progress < 100) {
+            return new vscode.ThemeIcon('circle-half-filled');
+        }
         return new vscode.ThemeIcon('pass-filled');
     }
 
